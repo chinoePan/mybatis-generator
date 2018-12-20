@@ -1,6 +1,7 @@
 package com.jay.generator.codegen.mybatis3.xmlmapper;
 
 import com.jay.generator.codegen.mybatis3.xmlmapper.elements.MySimpleCountListElementGenerator;
+import com.jay.generator.codegen.mybatis3.xmlmapper.elements.MySimpleDeleteByIdElementGenerator;
 import com.jay.generator.codegen.mybatis3.xmlmapper.elements.MySimpleInsertElementGenerator;
 import com.jay.generator.codegen.mybatis3.xmlmapper.elements.MySimpleQueryPageListElementGenerator;
 import org.mybatis.generator.api.FullyQualifiedTable;
@@ -29,7 +30,7 @@ public class MySimpleXMLMapperGenerator extends SimpleXMLMapperGenerator {
         answer.addAttribute(new Attribute("namespace", namespace));
         this.context.getCommentGenerator().addRootComment(answer);
         this.addResultMapElement(answer);
-        this.addDeleteByPrimaryKeyElement(answer);
+        this.addMyDeleteByIdElement(answer);
         this.addMyInsertElement(answer);
         this.addUpdateByPrimaryKeyElement(answer);
         this.addSelectByPrimaryKeyElement(answer);
@@ -49,7 +50,15 @@ public class MySimpleXMLMapperGenerator extends SimpleXMLMapperGenerator {
         AbstractXmlElementGenerator elementGenerator = new MySimpleInsertElementGenerator();
         this.initializeAndExecuteGenerator(elementGenerator, parentElement);
     }
-
+    /**
+     * 语句
+     *
+     * @param parentElement
+     */
+    protected void addMyDeleteByIdElement(XmlElement parentElement) {
+        AbstractXmlElementGenerator elementGenerator = new MySimpleDeleteByIdElementGenerator();
+        this.initializeAndExecuteGenerator(elementGenerator, parentElement);
+    }
     /**
      * 分页语句
      *
