@@ -35,7 +35,7 @@ public class MySimpleXMLMapperGenerator extends SimpleXMLMapperGenerator {
         this.addUpdateByPrimaryKeyElement(answer);
         this.addSelectByPrimaryKeyElement(answer);
         this.addSelectAllElement(answer);
-        this.addCountListElement(answer);
+       // this.addCountListElement(answer);
         this.addQueryPageListElement(answer);
         return answer;
 

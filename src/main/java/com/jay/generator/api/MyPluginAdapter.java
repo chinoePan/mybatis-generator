@@ -14,12 +14,26 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by generator.wei on 2017/12/23
  */
 public class MyPluginAdapter extends PluginAdapter{
+    private String  searchString = "Mapper$";
+    private String  replaceString = "Dao";
+    private Pattern pattern=Pattern.compile(searchString);
     public MyPluginAdapter() {
+    }
+
+    @Override
+    public void initialized(IntrospectedTable introspectedTable) {
+        String oldType = introspectedTable.getMyBatis3JavaMapperType();
+        Matcher matcher = pattern.matcher(oldType);
+        oldType = matcher.replaceAll(replaceString);
+
+        introspectedTable.setMyBatis3JavaMapperType(oldType);
     }
 
     /**

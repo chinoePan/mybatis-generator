@@ -23,47 +23,36 @@ public class ${className?cap_first}Controller {
 	private ${className?cap_first}Service ${className}Service;
 
 	/**
-	* 分页查询
-	* @param model
-	* @param pageNum
-	* @param pageSize
-	* @return
+	* 分页查询${className?cap_first}
+	* @param Map
+	* @param page
+	* @return modelMap
 	*/
-	@RequestMapping("/query")
+	@RequestMapping("/list.do")
+    @Authorize(module = "module_admin", result = ResultType.JSON)
 	@ResponseBody
-	public String queryPageList(Model model, Integer pageNum, Integer pageSize){
-			PageInfo<${className?cap_first}> pageInfo =new PageInfo<${className?cap_first}>();
-				if (pageNum != null && pageNum > 0) {
-				pageInfo.setPageNum(pageNum);
-				}
-				if (pageSize != null && pageSize > 0) {
-				pageInfo.setPageSize(pageSize);
-				}
-			pageInfo = ${className}Service.queryPageList(pageInfo);
-		    return "";
+	public Map list(@ModelAttribute("queryForm") ${className?cap_first}QueryForm queryForm, @RequestParam(required = false, value = "page", defaultValue = "1") Integer page){
+			Pager pager = new Pager(page);
+			List  ${className}List  = ${className}Service.get${className?cap_first}Page(queryForm,pager);
+			Map modelMap = BaseResult.buildResult();
+			modelMap.put("${className}List", ${className}List);
+			modelMap.put(Pager.KEY, pager);
+		    return modelMap;
 	}
 
 	/**
-	* 新增数据
-	* @param ${className}
-	* @return
+	* 保存${className?cap_first}
+	* @param ${className?cap_first}
+	* @return succ
 	*/
-	@RequestMapping(value="/add",method= RequestMethod.POST)
+	@RequestMapping(value="/save.do",method= RequestMethod.POST)
     @ResponseBody
-	public int  save${className?cap_first}(${className?cap_first} ${className}){
-		  int result = ${className}Service.save${className?cap_first}(${className});
+	public Map  save${className?cap_first}(@ModelAttribute(" ${className}")${className?cap_first} ${className}){
+		  boolean succ = ${className}Service.save${className?cap_first}(${className});
+		  String msg = messageSourceHelper.getMessage(succ ? "${className}.save.succ" : "${className}.save.fail");
+		  BaseResult result = BaseResult.buildResult(succ, msg);
 		  return result;
 	}
 
-	/**
-	* 修改数据
-	* @param ${className}
-	* @return
-	*/
-	@RequestMapping("/mod")
-	@ResponseBody
-	public int modify${className?cap_first}(${className?cap_first} ${className}){
-		  int result = ${className}Service.modify${className?cap_first}(${className});
-		  return result;
-	}
+
 }

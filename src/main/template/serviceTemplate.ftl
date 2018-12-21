@@ -15,7 +15,7 @@ public interface ${className?cap_first}Service {
 	* @param pageInfo
 	* @return
 	*/
-    PageInfo<${className?cap_first}> queryPageList(PageInfo<${className?cap_first}> pageInfo);
+    List get${className?cap_first}Page(${className?cap_first}QueryForm queryForm, Pager pager);
 
 	/**
 	* 新增数据
@@ -24,12 +24,7 @@ public interface ${className?cap_first}Service {
 	*/
 	int  save${className?cap_first}(${className?cap_first} ${className});
 
-	/**
-	* 修改数据
-	* @param ${className}
-	* @return
-	*/
-	int  modify${className?cap_first}(${className?cap_first} ${className});
+
 	
 
 

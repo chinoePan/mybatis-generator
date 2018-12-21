@@ -2,11 +2,14 @@ package com.jay.generator.codegen.mybatis3;
 
 import com.jay.generator.codegen.mybatis3.javamapper.MySimpleAnnotatedClientGenerator;
 import com.jay.generator.codegen.mybatis3.javamapper.MySimpleJavaClientGenerator;
+import com.jay.generator.codegen.mybatis3.model.MySimpleModelGenerator;
 import com.jay.generator.codegen.mybatis3.xmlmapper.MySimpleXMLMapperGenerator;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.ProgressCallback;
 import org.mybatis.generator.codegen.AbstractJavaClientGenerator;
+import org.mybatis.generator.codegen.AbstractJavaGenerator;
 import org.mybatis.generator.codegen.mybatis3.IntrospectedTableMyBatis3SimpleImpl;
+import org.mybatis.generator.codegen.mybatis3.model.SimpleModelGenerator;
 import org.mybatis.generator.internal.ObjectFactory;
 
 import java.util.List;
@@ -62,6 +65,8 @@ public class MyIntrospectedTableMyBatis3SimpleImpl extends IntrospectedTableMyBa
      */
     @Override
     protected void calculateJavaModelGenerators(List<String> warnings, ProgressCallback progressCallback) {
-        super.calculateJavaModelGenerators(warnings, progressCallback);
+        AbstractJavaGenerator javaGenerator = new MySimpleModelGenerator();
+        this.initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
+        this.javaModelGenerators.add(javaGenerator);
     }
 }

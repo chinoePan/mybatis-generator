@@ -15,30 +15,24 @@ import com.jay.generator.pagehelper.PageInfo;
 public class ${className?cap_first}ServiceImpl implements ${className?cap_first}Service{
 	
 	@Autowired
-  private ${className?cap_first}Mapper ${className}Mapper;
+  private ${className?cap_first}Dao ${className}Dao;
  @Override
- public PageInfo<${className?cap_first}>  queryPageList(PageInfo<${className?cap_first}> pageInfo){
-     try {
-       int total = ${className}Mapper.countList();
-		if(total>0){
-			List<${className?cap_first}> list = ${className}Mapper.queryPageList((pageInfo.getPageNum()-1)* pageInfo.getPageSize(), pageInfo.getPageSize());
-			pageInfo.setList(list);
-			pageInfo.setTotal(total);
-           }
-		} catch (Exception e) {
-
-		return null;
+    List get${className?cap_first}Page(${className?cap_first}QueryForm queryForm, Pager pager){
+		Map paramsMap = new HashMap<>();
+		paramsMap.put(Pager.KEY, pager);
+		 if (queryForm != null) {
 		}
-        return pageInfo;
+		return ${className}Dao.find${className?cap_first}Page(paramsMap);
+
 	}
 	@Override
 	public int save${className?cap_first}(${className?cap_first} ${className}){
-		  int result = ${className}Mapper.insert(${className});
+		  int result = ${className}Dao.insert(${className});
 		  return result;
 	}
     @Override
 	public int  modify${className?cap_first}(${className?cap_first} ${className}){
-		  int result = ${className}Mapper.updateByPrimaryKey(${className});
+		  int result = ${className}Dao.updateByPrimaryKey(${className});
 		  return result;
 	}
 

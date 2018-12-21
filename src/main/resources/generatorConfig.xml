@@ -20,7 +20,8 @@
         </commentGenerator>
         <!--数据库链接地址账号密码-->
         <jdbcConnection driverClass="${driverClass}" connectionURL="${jdbcUrl}" userId="${user}" password="${password}">
-
+            <!--设置可以获取tables remarks信息-->
+            <property name="useInformationSchema" value="true"/>
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -49,8 +50,6 @@
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" selectByPrimaryKeyQueryId="false">
             <property name="useActualColumnNames" value="true"/>
-
-
         </table>
 
     </context>

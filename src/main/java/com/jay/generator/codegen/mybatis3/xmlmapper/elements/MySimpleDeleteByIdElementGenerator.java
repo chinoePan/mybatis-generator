@@ -23,7 +23,8 @@ public class MySimpleDeleteByIdElementGenerator extends AbstractXmlElementGenera
     @Override
     public void addElements(XmlElement parentElement) {
         XmlElement answer = new XmlElement("delete");
-        answer.addAttribute(new Attribute("id", this.introspectedTable.getDeleteByPrimaryKeyStatementId()));
+        FullyQualifiedJavaType listType = new FullyQualifiedJavaType(this.introspectedTable.getBaseRecordType());
+        answer.addAttribute(new Attribute("id", "delete"+listType.getShortName()));
         String parameterClass;
         if ( this.introspectedTable.getRules().generatePrimaryKeyClass()) {
             parameterClass = this.introspectedTable.getPrimaryKeyType();

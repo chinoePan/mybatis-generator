@@ -1,6 +1,7 @@
 package com.jay.generator.codegen.mybatis3.javamapper;
 
 import com.jay.generator.codegen.mybatis3.javamapper.elements.CountListMethodGenerator;
+import com.jay.generator.codegen.mybatis3.javamapper.elements.MyDeleteByPrimaryKeyMethodGenerator;
 import com.jay.generator.codegen.mybatis3.javamapper.elements.MyInsertMethodGenerator;
 import com.jay.generator.codegen.mybatis3.javamapper.elements.QueryPageListMethodGenerator;
 import org.mybatis.generator.api.CommentGenerator;
@@ -48,13 +49,13 @@ public class MySimpleJavaClientGenerator extends SimpleJavaClientGenerator {
             interfaze.addSuperInterface(fqjt);
             interfaze.addImportedType(fqjt);
         }
-        this.addDeleteByPrimaryKeyMethod(interfaze);
+        this.addMyDeleteByPrimaryKeyMethod(interfaze);
         //this.addInsertMethod(interfaze);
         this.addMyInsertMethod(interfaze);
         this.addSelectByPrimaryKeyMethod(interfaze);
         this.addSelectAllMethod(interfaze);
         this.addUpdateByPrimaryKeyMethod(interfaze);
-        this.addCountListMethod(interfaze);
+      //  this.addCountListMethod(interfaze);
         this.addQueryPageListMethod(interfaze);
         List<CompilationUnit> answer = new ArrayList<CompilationUnit>();
         if (this.context.getPlugins().clientGenerated(interfaze, (TopLevelClass) null, this.introspectedTable)) {
@@ -79,7 +80,16 @@ public class MySimpleJavaClientGenerator extends SimpleJavaClientGenerator {
         this.initializeAndExecuteGenerator(methodGenerator, interfaze);
 
     }
+    /**
+     * 生成删除语句的方法
+     *
+     * @param interfaze
+     */
+    protected void addMyDeleteByPrimaryKeyMethod(Interface interfaze) {
+        AbstractJavaMapperMethodGenerator methodGenerator = new MyDeleteByPrimaryKeyMethodGenerator();
+        this.initializeAndExecuteGenerator(methodGenerator, interfaze);
 
+    }
     /**
      * 生成统计数量的方法
      *

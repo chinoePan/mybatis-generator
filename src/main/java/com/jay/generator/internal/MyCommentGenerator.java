@@ -103,6 +103,8 @@ public class MyCommentGenerator extends DefaultCommentGenerator {
         if (suppressAllComments) {
             return;
         }
+        if (introspectedColumn.getRemarks()==null||introspectedColumn.getRemarks()=="")
+            return;
         StringBuilder sb = new StringBuilder();
         field.addJavaDocLine("/**");
         sb.append(" * ");
@@ -135,44 +137,44 @@ public class MyCommentGenerator extends DefaultCommentGenerator {
     @Override
     public void addGetterComment(Method method, IntrospectedTable introspectedTable,
                                  IntrospectedColumn introspectedColumn) {
-        if (suppressAllComments) {
-            return;
-        }
-        method.addJavaDocLine("/**");
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(" * ");
-        sb.append(introspectedColumn.getRemarks());
-        method.addJavaDocLine(sb.toString());
-
-        sb.setLength(0);
-        sb.append(" * @return ");
-        sb.append(introspectedColumn.getActualColumnName());
-        sb.append(" ");
-        sb.append(introspectedColumn.getRemarks());
-        method.addJavaDocLine(sb.toString());
-        method.addJavaDocLine(" */");
+//        if (suppressAllComments) {
+//            return;
+//        }
+//        method.addJavaDocLine("/**");
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(" * ");
+//        sb.append(introspectedColumn.getRemarks());
+//        method.addJavaDocLine(sb.toString());
+//
+//        sb.setLength(0);
+//        sb.append(" * @return ");
+//        sb.append(introspectedColumn.getActualColumnName());
+//        sb.append(" ");
+//        sb.append(introspectedColumn.getRemarks());
+//        method.addJavaDocLine(sb.toString());
+//        method.addJavaDocLine(" */");
     }
     @Override
     public void addSetterComment(Method method, IntrospectedTable introspectedTable,
                                  IntrospectedColumn introspectedColumn) {
-        if (suppressAllComments) {
-            return;
-        }
-        method.addJavaDocLine("/**");
-        StringBuilder sb = new StringBuilder();
-        sb.append(" * ");
-        sb.append(introspectedColumn.getRemarks());
-        method.addJavaDocLine(sb.toString());
-
-        Parameter parm = method.getParameters().get(0);
-        sb.setLength(0);
-        sb.append(" * @param ");
-        sb.append(parm.getName());
-        sb.append(" ");
-        sb.append(introspectedColumn.getRemarks());
-        method.addJavaDocLine(sb.toString());
-        method.addJavaDocLine(" */");
+//        if (suppressAllComments) {
+//            return;
+//        }
+//        method.addJavaDocLine("/**");
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(" * ");
+//        sb.append(introspectedColumn.getRemarks());
+//        method.addJavaDocLine(sb.toString());
+//
+//        Parameter parm = method.getParameters().get(0);
+//        sb.setLength(0);
+//        sb.append(" * @param ");
+//        sb.append(parm.getName());
+//        sb.append(" ");
+//        sb.append(introspectedColumn.getRemarks());
+//        method.addJavaDocLine(sb.toString());
+//        method.addJavaDocLine(" */");
 
     }
     @Override
